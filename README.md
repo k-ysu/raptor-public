@@ -10,6 +10,15 @@ https://coregame.jp/
 English
 https://coregame.tv/
 
+# Environment
+
+* Python3.6
+* Django
+* Nginx
+* Gunicorn
+* Mysql
+* CentOS7(VPS)
+
 # How Raptor works? 
 ![Raptor](how-raptor-works.jpg)
 
