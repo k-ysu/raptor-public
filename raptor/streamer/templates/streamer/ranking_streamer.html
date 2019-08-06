@@ -1,0 +1,221 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block tag_for_seo %}
+  {% if sort_id == 'all' and  video_ranks.number == 1 %}
+  {% else %}
+    <meta name="robots" content="noindex" />
+  {% endif %}
+{% endblock tag_for_seo %}
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{ h1_category }}{{h1_streamer_title}}{% trans 'Ranking' %}({{ h1_sort }}) | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{{ h1_category }}{{h1_streamer_title}}{% trans 'Ranking' %}({{ h1_sort }}){% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{# Thie meta tag is so complicated. I don't use django translate framework #}
+{% block keywords %}{% if common_settings.server_service == 'jp' %}{{ h1_category }}{{h1_streamer_title}},ランキング,{{ h1_sort }},CoreGameTV,コアゲーム,コアゲームTV{% else %}{{ h1_category }}{{h1_streamer_title}},ranking,{{ h1_sort }},core game tv,core game{% endif %}{% endblock keywords %}
+{% block description %}{% if common_settings.server_service == 'jp' %}人気の{{ h1_category }}{{h1_streamer_title}}のランキング({{ h1_sort }})です。好きな{{ h1_category }}{{h1_streamer_title}}を見つけてファンになろう！{% else %}Ranking for {{ h1_category }}{{h1_streamer_title}}({{ h1_sort }}). Finde your favorit {{ h1_category }}{{h1_streamer_title}}！{% endif %}{% endblock description %}
+{% block og_description %}{% if common_settings.server_service == 'jp' %}人気の{{ h1_category }}{{h1_streamer_title}}のランキング({{ h1_sort }})です。好きな{{ h1_category }}{{h1_streamer_title}}を見つけてファンになろう！{% else %}Ranking for {{ h1_category }}{{h1_streamer_title}}({{ h1_sort }}). Finde your favorit {{ h1_category }}{{h1_streamer_title}}！{% endif %}{% endblock og_description %}
+
+
+{# Navi Top for Mobile #}
+{% block topnavi %}
+
+  <div>
+      {% trans 'Popular Games' %}
+  </div>
+  <div>
+    {% for key, g in popular_games.items %}
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=40 alt="{{g.game_name_global}}">&nbsp;
+      </a>
+
+    {% endfor %}
+  </div>
+
+
+{% endblock topnavi %}
+
+
+{# Navi Side for PC #}
+{% block naviside %}
+
+  <div class="mt-3">
+    {% trans 'Popular Games' %}
+  </div>
+  <div>
+
+    {% for key, g in popular_games.items %}
+
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=30 alt="{{g.game_name_global}}">&nbsp;
+        <small>{{g.game_name_global}}</small>
+      </a><br />
+
+    {% endfor %}
+
+  </div>
+
+
+{% endblock naviside %}
+
+
+
+{% block content %}
+
+{# H1 #}
+<h1 class="h5 mt-5 border-bottom text-center font-weight-bold">{{ h1_category }}{{h1_streamer_title}}{% trans 'Ranking' %}({{ h1_sort }})</h1>
+
+<div class="row mt-3">
+  <div class="col-12 text-center">
+    {#  Cateogry Button #}
+    <div>
+      <a href="{% url 'ranking' 'streamer' sort_id  'all' 1 %}">
+        <button class="btn  btn-secondary btn-sm {% if category == 10 %}active{% endif %}" type="button">
+          ALL
+        </button>
+      </a>
+
+      <a href="{% url 'ranking' 'streamer' sort_id  'male' 1 %}">
+        <button class="btn  btn-secondary btn-sm {% if category == 1 %}active{% endif %}" type="button">
+          <i class="em em-boy"></i>{% trans 'Male' %}
+        </button>
+      </a>
+
+      <a href="{% url 'ranking' 'streamer' sort_id  'female' 1 %}">
+        <button class="btn  btn-secondary btn-sm {% if category == 2 %}active{% endif %}" type="button">
+          <i class="em em-girl"></i>{% trans 'Female' %}
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="col-12 text-center mt-3">
+
+    {#  Sort pull down #}
+    <div class="dropdown show">
+      <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if sort_id == 'all' %}
+          {% trans 'Total views last 48h' %}
+        {% elif sort_id == 'growing' %}
+          {% trans 'Growing(subscriber last 48h)' %}
+        {% elif sort_id == 'subscriber' %}
+          {% trans 'Total Subscriber' %}
+        {% endif %}
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item {% if sort_id == 'all' %}active{% endif %}" href="{% url 'ranking' 'streamer' 'all' 'all' 1 %}">{% trans 'Total views last 48h' %}</a>
+        <a class="dropdown-item {% if sort_id == 'growing' %}active{% endif %}" href="{% url 'ranking' 'streamer' 'growing' 'all' 1 %}">{% trans 'Growing(subscriber last 48h)' %}</a>
+        <a class="dropdown-item {% if sort_id == 'subscriber' %}active{% endif %}" href="{% url 'ranking' 'streamer' 'subscriber' 'all' 1 %}">{% trans 'Total Subscriber' %}</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{# Streamer Detail #}
+<div class="container mt-3 bg-clearblack ">
+  {% for s in streamer_ranks %}
+      <div class="row border-bottom">
+        <div class="col-3 col-md-2 align-self-center text-center">
+          <a href="{% url 'streamer' s.streamer_id %}">
+            <img class="mt-2" src="{{s.streamer_thumbnail}}" width=80% alt="{{s.streamer_name}}">
+          </a>
+        </div>
+        <div class="col-7 col-md-3">
+          <div class="mb-2 mt-2">
+            #{{ forloop.counter|add:rank_start }}:
+            <a href="{% url 'streamer' s.streamer_id %}">
+              {{s.streamer_name}}
+            </a>
+            {% if s.gender == s.GENDER_MALE %}
+              <span class = "text-primary">(♂)</span>
+            {% elif s.gender == s.GENDER_FEMALE %}
+              <span class = "text-danger">(♀)</span>
+            {% else %}
+              <span class = "text-info">(?)</span>
+            {% endif %}
+          </div>
+
+          {% if sort_id == 'all' %}
+
+            <div class = "small">
+              {% trans 'Views(last 48h)' %}:<span class="text-danger">{{s.total_view_count_last48h| intcomma:False }}</span>
+            </div>
+            <div class = "small">
+              {% trans 'Subscriber(last 48h)' %}:<span class="text-info">{{s.total_subscribe_count_last48h| intcomma:False }}</span>
+            </div>
+            <div class = "small">
+              {% trans 'Total Subscriber' %}:<span class="text-info">{{s.youtube_suscribers| intcomma:False }}<span>
+            </div>
+
+          {% elif sort_id == 'growing' %}
+
+            <div class = "small">
+              {% trans 'Views(last 48h)' %}:<span class="text-danger">{{s.total_subscribe_count_last48h| intcomma:False }}</span>
+            </div>
+            <div class = "small">
+              {% trans 'Subscriber(last 48h)' %}:<span class="text-info">{{s.youtube_suscribers| intcomma:False }}<span>
+            </div>
+            <div class = "small">
+              {% trans 'Total Subscriber' %}:<span class="text-info">{{s.total_view_count_last48h| intcomma:False }}</span>
+            </div>
+
+          {% elif sort_id == 'subscriber' %}
+
+            <div class = "small">
+              {% trans 'Views(last 48h)' %}:<span class="text-danger">{{s.youtube_suscribers| intcomma:False }}<span>
+            </div>
+            <div class = "small">
+              {% trans 'Subscriber(last 48h)' %}:<span class="text-info">{{s.total_subscribe_count_last48h| intcomma:False }}</span>
+            </div>
+            <div class = "small">
+              {% trans 'Total Subscriber' %}:<span class="text-info">{{s.total_view_count_last48h| intcomma:False }}</span>
+            </div>
+          {% endif %}
+
+        </div>
+        <div class="col-2 col-md-7 text-left">
+          {% if s.game.id != 1 %}
+            <a href="{% url 'game' s.game.game_name_sys %}">
+              <img class="mt-2" src='{{ MEDIA_URL }}{{s.game.game_icon}}' style="width:40px;">
+            </a>
+          {% else %}
+            <a href="{% url 'game' s.game.game_name_sys %}">
+              <img class="mt-2" src='{{ MEDIA_URL }}{{s.game.game_icon}}' style="width:40px;">
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+  {% endfor %}
+</div>
+
+<div class="h5 mt-2 text-center">
+    <span>
+        {% if streamer_ranks.has_previous %}
+            <a href="{% url 'ranking' 'streamer' sort_id category streamer_ranks.previous_page_number %}"">前のページ<<</a>
+        {% endif %}
+
+        <span class="current">
+            ( Page {{ streamer_ranks.number }} )
+        </span>
+
+        {% if streamer_ranks.has_next %}
+            <a href="{% url 'ranking' 'streamer' sort_id category streamer_ranks.next_page_number %}">>> 次のページ</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+
+{% endblock content %}

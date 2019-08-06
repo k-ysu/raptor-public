@@ -1,0 +1,212 @@
+{% load i18n static %}
+<!DOCTYPE html>{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+
+{# Google Analytics #}
+{% if common_settings.server_service == 'jp' and common_settings.server_config == 'prod' %}
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142176979-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142176979-1');
+  </script>
+
+{% elif common_settings.server_service == 'global' and common_settings.server_config == 'prod' %}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142176979-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+        gtag('config', 'UA-142176979-2');
+</script>
+
+
+{% endif %}
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="{% static 'streamer/scss/bootstrap.css' %}">
+<link rel="stylesheet" href="{% static 'streamer/css/emoji.css' %}">
+<link rel="stylesheet" href="{% static 'streamer/css/social-share.css' %}">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="shortcut icon" href="{% static "streamer/img/coregame_favicon.png" %}" type="image/png">
+
+{# SEO Setting #}
+{% block tag_for_seo %}{% endblock %}
+<meta name="keywords" content="{% block keywords %}My Words{% endblock %}">
+<meta name="description" content="{% block description %}My Words{% endblock %}">
+<meta property="og:title" content="{% block og_title %}My books{% endblock %}" /＞
+<meta property="og:description" content="{% block og_description %}{% endblock %}" />
+<meta property="og:url" content="{% block og_url %}My URL{% endblock %}" /＞
+<meta property="og:site_name" content="{% block og_site_name %}{% endblock %}" />
+{% if common_settings.server_service == 'jp' %}
+<meta property="og:locale" content="ja_JP" />
+{% else %}
+<meta property="og:locale" content="en_us" />
+{% endif %}
+<meta property="og:image" content="{% block og_image %}My URL{% endblock %}" />
+<meta name="twitter:card" content="{% block twitter_card %}summary{% endblock %}">
+<meta name="twitter:site" content="{% block twitter_account %}@coregametv{% endblock %}" />
+
+
+
+{% block extra_css %}{% endblock %}
+<title>{% block title %}My books{% endblock %}</title>
+</head>
+<body class="text-white">
+
+<div class="d-sm-none d-block">
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark  fixed-top">
+
+    {# Brand #}
+    <a class="navbar-brand" href="{% url 'top' %}">
+      <img src="{% static "streamer/img/core-game-logo.png" %}" alt="CoreGameTV" width="40%">
+    </a>
+
+    {# Toggler/collapsibe Button #}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {# Navbar links #}
+    <div class="collapse navbar-collapse mt-3 mb-3" id="collapsibleNavbar">
+      <div class="border-bottom"></div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'top' %}">
+            <i class="em em-house"></i>&nbsp;TOP
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'game_list' 10 %}">
+            <i class="em em-video_game"></i>&nbsp;{% trans 'Game List' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ranking' 'streamer' 'all' 'all' 1 %}">
+            <i class="em em-crown"></i>&nbsp;{% trans 'Game Streamer Ranking' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ranking' 'video' 'all' 'all' 1 %}">
+            <i class="em em-movie_camera"></i>&nbsp;{% trans 'Game Video Ranking' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'ranking' 'video' 'new' 'all' 1 %}">
+            <i class="em em-new"></i>&nbsp;{% trans 'New Videos' %}
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mailto:esports.raptor@gmail.com">
+            <i class="em em-email"></i>&nbsp;{% trans 'Inquiry' %}
+          </a>
+        </li>
+
+
+      </ul>
+      {% block topnavi %}
+        {{ topnavi }}
+      {% endblock %}
+    </div>
+  </nav>
+
+
+
+</div>
+
+
+
+  <div class="container-fluid">
+    <div class="row">
+       <nav class="col-md-2 d-none d-md-block bg-clearblack sidebar">
+         <div class="sidebar-sticky">
+
+           <!-- Brand -->
+           <div class="border-bottom text-center">
+             <a class="navbar-brand mt-2 mb-2" href="{% url 'top' %}">
+               <img src="{% static "streamer/img/core-game-logo.png" %}" alt="CoreGameTV" width="80%">
+             </a>
+           </div>
+
+           <ul class="nav flex-column mt-3 mb-3">
+             <li class="nav-item">
+               <a href="{% url 'top' %}">
+                 <i class="em em-house"></i>&nbsp;TOP
+               </a>
+             </li>
+             <li class="nav-item">
+              <a href="{% url 'game_list' 10 %}">
+                  <i class="em em-video_game"></i>&nbsp;{% trans 'Game List' %}
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="{% url 'ranking' 'streamer' 'all' 'all' 1 %}">
+                 <i class="em em-crown"></i>&nbsp;{% trans 'Game Streamer Ranking' %}
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="{% url 'ranking' 'video' 'all' 'all' 1 %}">
+                 <i class="em em-movie_camera"></i></i>&nbsp;{% trans 'Game Video Ranking' %}
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="{% url 'ranking' 'video' 'new' 'all' 1 %}">
+                 <i class="em em-new"></i></i>&nbsp;{% trans 'New Videos' %}
+               </a>
+             </li>
+             <li class="nav-item">
+               <a href="mailto:esports.raptor@gmail.com">
+                 <i class="em em-email"></i>&nbsp;{% trans 'Inquiry' %}
+               </a>
+             </li>
+           </ul>
+          </div>
+          <div class="border-bottom"></div>
+          <div class="mt-3">
+            {% block naviside %}
+              {{ naviside }}
+            {% endblock %}
+          </div>
+        </nav>
+        <main role="main" class="col-md-10 col-lg-10 pt-3 px-4 bg-darkblak">
+          {% block content %}
+            {{ content }}
+          {% endblock %}
+        </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer font-small bg-darkblak">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+
+      <div class="mt-5 ">
+        <small>
+          <div class="mt-1">© 2019 Copyright:<a href="{% url 'top' %}" class="text-muted">coregame.jp</a></div>
+          <div class="mt-1"><i class="em em-email"></i>&nbsp;{% trans 'Inquiry' %}:<a href="mailto:esports.raptor@gmail.com">esports.raptor@gmail.com</a></div>
+          <div class="mt-1">{% trans 'Rights for images on coregame.tv are belongs to Streamers, Streaming media, Someone who has rights' %}</div>
+        </small>
+      </div>
+
+    </div>
+    <!-- Copyright -->
+
+  </footer>
+  <!-- Footer -->
+
+<script src="{% static 'streamer/js/jquery-3.4.0.min.js' %}"></script>
+<script src="{% static 'streamer/js/bootstrap.bundle.min.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

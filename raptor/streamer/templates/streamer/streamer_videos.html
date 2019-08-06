@@ -1,0 +1,113 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block tag_for_seo %}<meta name="robots" content="noindex" />{% endblock tag_for_seo %}
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{streamer.streamer_name}} - {{h1_str}} | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{{streamer.streamer_name}} - {{h1_str}}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{{streamer.streamer_name}},{{h1_str}},{{game.game_name_global}},core game tv,core game,game video,esports video{% endblock keywords %}
+{% block description %}{{streamer.streamer_name}} - {{h1_str}} {{game.game_name_global}}{% endblock description %}
+{% block og_description %}{{streamer.streamer_name}} - {{h1_str}} {{game.game_name_global}} {% endblock og_description %}
+
+
+
+
+{% block topnavi %}
+  {% include './common/navitop-game.html' with game=game streamer=streamer game_streamers=game_streamers %}
+{% endblock topnavi %}
+
+
+{% block naviside %}
+  {% include './common/naviside-game.html' with game=game streamer=streamer game_streamers=game_streamers %}
+{% endblock naviside %}
+
+
+
+{% block content %}
+
+{# Category Tree #}
+<small>
+  <div class="mt-5">
+    <a href="{% url 'index' %}">TOP</a> >
+    <a href="{% url 'game' game.game_name_sys %}">{{game.game_name_global}}</a> >
+    <a href="{% url 'streamer' streamer.id %}">{{streamer.streamer_name}} </a> >
+    {{h1_str}}
+  </div>
+</small>
+
+
+
+{# H1 #}
+<h1 class="h3 mt-3 border-bottom text-center font-weight-bold"><img src="{{streamer.streamer_thumbnail}}" style="width:30px;" alt="{{streamer.streamer_name}}">&nbsp;{{streamer.streamer_name}} : {{h1_str}} </h1>
+
+{# HEADER BANNER #}
+<div class="mt-2 text-center">
+  <img src="{{streamer.streamer_banner}}" width=90% alt="{{streamer.streamer_name}}">
+</div>
+
+{# Link Button #}
+<div class="text-center mt-3">
+  {% if sort_id != 1 %}
+  <a href="{% url 'streamer_videos' streamer.id 'new' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'New' %}
+    </button>
+  </a>
+  {% endif %}
+
+  {% if sort_id != 2 %}
+  <a href="{% url 'streamer_videos' streamer.id 'recommend' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'Recommend' %}
+    </button>
+  </a>
+  {% endif %}
+
+  {% if sort_id != 3 %}
+  <a href="{% url 'streamer_videos' streamer.id 'popular' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'Popular' %}
+    </button>
+  </a>
+  {% endif %}
+
+
+</div>
+
+
+
+
+
+<div class="collapse" id="collapseShare">
+  <div class="card card-body text-center bg-clearblack">
+    <p>
+      <i class="fab fa-facebook-square fa-2x"></i>&nbsp;
+      <i class="fab fa-twitter-square fa-2x"></i>&nbsp;
+      <i class="fab fa-linkedin fa-2x"></i>&nbsp;
+      <i class="fab fa-google-plus-square fa-2x"></i>&nbsp;
+      <i class="fab fa-tumblr fa-2x"></i>&nbsp;
+      <i class="fab fa-pinterest fa-2x"></i>&nbsp;
+    </p>
+  </div>
+</div>
+
+
+
+
+<div class="mt-2 container-fluid text-black">
+    <div class="row">
+    {% for v in videos %}
+      {% include './common/show_video_list.html' with video=v %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock content %}

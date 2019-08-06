@@ -1,0 +1,95 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block tag_for_seo %}<meta name="robots" content="noindex" />{% endblock tag_for_seo %}
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{game.game_name_global}} {{h1_str}} | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{{game.game_name_global}} {{h1_str}}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{{game.game_name_global}},{{h1_str}},{% trans 'core game tv,core game' %}{% endblock keywords %}
+{% block description %}{{game.game_name_global}} {{h1_str}}{% endblock description %}
+{% block og_description %}{{game.game_name_global}} {{h1_str}}{% endblock og_description %}
+
+
+{% block topnavi %}
+  {% include './common/navitop-game.html' with game=game streamer=streamer game_streamers=game_streamers %}
+{% endblock topnavi %}
+
+
+{% block naviside %}
+  {% include './common/naviside-game.html' with game=game streamer=streamer game_streamers=game_streamers %}
+{% endblock naviside %}
+
+
+
+{% block content %}
+
+{# Category Tree #}
+<small>
+  <div class="mt-5">
+    <a href="{% url 'index' %}">TOP</a> >
+    <a href="{% url 'game' game.game_name_sys %}">{{game.game_name_global}}</a> >
+    {{h1_str}}
+  </div>
+</small>
+
+{# H1 #}
+<h1 class="h3 mt-3 border-bottom text-center font-weight-bold"><img src='{{ MEDIA_URL }}{{game.game_icon}}' width=40 alt="{{game.game_name_global}}">&nbsp;{{game.game_name_global}}: {{h1_str}} </h1>
+
+
+{# Link Button #}
+<div class="text-center mt-3">
+  {% if sort_id != 1 %}
+  <a href="{% url 'game_videos' game.game_name_sys 'new' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'New' %}
+    </button>
+  </a>
+  {% endif %}
+
+  {% if sort_id != 2 %}
+  <a href="{% url 'game_videos' game.game_name_sys 'recommend' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'Recommend' %}
+    </button>
+  </a>
+  {% endif %}
+
+  {% if sort_id != 3 %}
+  <a href="{% url 'game_videos' game.game_name_sys 'popular' %}">
+    <button class="btn  btn-secondary btn-sm" type="button">
+      {% trans 'Popular' %}
+    </button>
+  </a>
+  {% endif %}
+
+  <a href="{% url 'game' game.game_name_sys %}">
+    <img src='{{ MEDIA_URL }}{{game.game_icon}}' width="40px" alt="{{game.game_name_global}}"><br />
+  </a>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="mt-2 container-fluid text-black">
+    <div class="row">
+    {% for v in videos %}
+      {% include './common/show_video_list.html' with video=v %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% endblock content %}

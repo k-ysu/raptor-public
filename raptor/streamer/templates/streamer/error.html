@@ -1,0 +1,30 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{# SEO Setting #}
+{% block tag_for_seo %}<meta name="robots" content="noindex" />{% endblock tag_for_seo %}
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_top_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{ seo_settings.website }}|{% trans '404 : Page not found' %}{% endblock title %}
+{% block og_title %}{% trans 'Game Video Platform' %}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{% trans 'Core Game TV' %}{% endblock keywords %}
+{% block description %}{% trans 'Core Game TV' %}{% endblock description %}
+{% block og_description %}{% trans 'Core Game TV' %}{% endblock og_description %}
+
+
+
+
+{% block content %}
+
+<div class="text-center mt-5">
+  404 : {% trans 'Requested page is not found' %}
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,162 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block tag_for_seo %}
+  {% if sort_id == 'all' and category == 'all' and  video_ranks.number == 1 %}
+  {% else %}
+    <meta name="robots" content="noindex" />
+  {% endif %}
+{% endblock tag_for_seo %}
+
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{ h1_category }}{% trans 'Game Video Ranking' %}({{ h1_sort }}) | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{{ h1_category }}{% trans 'Game Video Ranking' %}({{ h1_sort }}){% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{# Thie meta tag is so complicated. I don't use django translate framework #}
+{% block keywords %}{% if common_settings.server_service == 'jp' %}{{ h1_category }}ゲーム動画,ランキング,{{ h1_sort }},CoreGameTV,コアゲーム,コアゲームTV{% else %}{{h1_category}},game video ranking,eposrts ranking,{{ h1_sort }},core game tv,core game{% endif %}{% endblock keywords %}
+{% block description %}{% if common_settings.server_service == 'jp' %}人気の{{ h1_category }}ゲーム動画({{ h1_sort }})のランキングです。好きな{{ h1_category }}ゲーム動画を見つけてファンになろう！{{h1_streamer_title}}を見つけてファンになろう！{% else %}Ranking for {{ h1_category }}Game Video Ranking({{ h1_sort }}). Finde your favorit {{ h1_category }}Game Video！{% endif %}{% endblock description %}
+{% block og_description %}{% if common_settings.server_service == 'jp' %}人気の{{ h1_category }}ゲーム動画({{ h1_sort }})のランキングです。好きな{{ h1_category }}ゲーム動画を見つけてファンになろう！{% else %}Ranking for {{ h1_category }}Game Video Ranking({{ h1_sort }}). Finde your favorit {{ h1_category }}Game Video！{% endif %}{% endblock og_description %}
+
+
+
+
+
+{# Navi Top for Mobile #}
+{% block topnavi %}
+
+  <div>
+      {% trans 'Popular Games' %}
+  </div>
+  <div>
+    {% for key, g in popular_games.items %}
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=40>&nbsp;
+      </a>
+
+    {% endfor %}
+  </div>
+
+
+{% endblock topnavi %}
+
+{# Navi Side for PC #}
+{% block naviside %}
+
+  <div class="mt-3">
+    {% trans 'Popular Games' %}
+  </div>
+  <div>
+
+    {% for key, g in popular_games.items %}
+
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=30>&nbsp;
+        <small>{{g.game_name_global}}</small>
+      </a><br />
+
+    {% endfor %}
+
+  </div>
+
+
+{% endblock naviside %}
+
+
+
+{% block content %}
+
+{# H1 #}
+<h1 class="h4 mt-5 border-bottom text-center font-weight-bold">{{ h1_category }}{% trans 'Game Video Ranking' %}({{ h1_sort }})</h1>
+
+
+{# Link Button #}
+<div class="text-center mt-3">
+  <a href="{% url 'ranking' 'video' sort_id 'all' 1 %}">
+    <button class="btn  btn-secondary btn-sm {% if category == 'all' %}active{% endif %}" type="button">
+      ALL
+    </button>
+  </a>
+
+  <a href="{% url 'ranking' 'video' sort_id 'pc' 1 %}">
+    <button class="btn  btn-secondary btn-sm {% if category == 'pc' %}active{% endif %}" type="button">
+      <i class="em em-computer"></i>PC
+    </button>
+  </a>
+
+  <a href="{% url 'ranking' 'video' sort_id 'mobile' 1 %}">
+    <button class="btn  btn-secondary btn-sm {% if category == 'mobile' %}active{% endif %}" type="button">
+      <i class="em em-iphone"></i>{% trans 'Mobile' %}
+    </button>
+  </a>
+
+  <a href="{% url 'ranking' 'video' sort_id 'console' 1 %}">
+    <button class="btn  btn-secondary btn-sm {% if category == 'console' %}active{% endif %}" type="button">
+      <i class="em em-video_game"></i>{% trans 'Console' %}
+    </button>
+  </a>
+</div>
+
+
+<div class="text-center mt-3">
+
+  {#  Sort pull down #}
+  <div class="dropdown show">
+    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {% if sort_id == 'new' %}
+        {% trans 'New' %}
+      {% elif sort_id == 'all' %}
+        {% trans 'Total views last 48h' %}
+      {% elif sort_id == 'toprate' %}
+        {% trans 'Top Rate' %}
+      {% elif sort_id == 'views' %}
+        {% trans 'Total views' %}
+      {% endif %}
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item {% if sort_id == 'all' %}active{% endif %}" href="{% url 'ranking' 'video' 'all' 'all' 1 %}">{% trans 'Total views last 48h' %}</a>
+      <a class="dropdown-item {% if sort_id == 'toprate' %}active{% endif %}" href="{% url 'ranking' 'video' 'toprate' 'all' 1 %}">{% trans 'Top Rate' %}</a>
+      <a class="dropdown-item {% if sort_id == 'new' %}active{% endif %}" href="{% url 'ranking' 'video' 'new' 'all' 1 %}">{% trans 'New' %}</a>
+      <a class="dropdown-item {% if sort_id == 'views' %}active{% endif %}" href="{% url 'ranking' 'video' 'views' 'all' 1 %}">{% trans 'Total views' %}</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="mt-2 container-fluid text-black">
+    <div class="row">
+    {% for v in video_ranks %}
+      {% include './common/show_video_list_from_rank_table.html' with video=v %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="h5 mt-2 text-center">
+    <span>
+        {% if video_ranks.has_previous %}
+            <a href="{% url 'ranking' 'video' sort_id category video_ranks.previous_page_number %}"">前のページ<<</a>
+        {% endif %}
+
+        <span class="current">
+            ( Page {{ video_ranks.number }} )
+        </span>
+
+        {% if video_ranks.has_next %}
+            <a href="{% url 'ranking' 'video' sort_id category video_ranks.next_page_number %}">>> 次のページ</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+
+{% endblock content %}

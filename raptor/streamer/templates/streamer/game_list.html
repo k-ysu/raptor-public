@@ -1,0 +1,131 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{% trans 'Popular Games List' %} | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{% trans 'Popular Games List' %}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{% trans 'popular game,popular game list,core game tv,core game,game video,game streaming' %}{% endblock keywords %}
+{% block description %}{% trans 'Game lists which is most viewed in last 48 hours. Finder your favorit game video!' %}{% endblock description %}
+{% block og_description %}{% trans 'Game lists which is most viewed in last 48 hours. Finder your favorit game video!' %}{% endblock og_description %}
+
+
+
+
+
+{# Navi Top for Mobile #}
+{% block topnavi %}
+
+  <div>
+      {% trans 'Popular Games' %}
+  </div>
+  <div>
+    {% for key, g in popular_games_navi.items %}
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=40 alt="{{g.game_name_global}}">&nbsp;
+      </a>
+
+    {% endfor %}
+  </div>
+
+
+{% endblock topnavi %}
+
+
+{# Navi Side for PC #}
+{% block naviside %}
+
+  <div class="mt-3">
+    {% trans 'Popular Games' %}
+  </div>
+  <div>
+
+    {% for key, g in popular_games_navi.items %}
+
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=30 alt="{{g.game_name_global}}">&nbsp;
+        <small>{{g.game_name_global}}</small>
+      </a><br />
+
+    {% endfor %}
+
+  </div>
+
+
+{% endblock naviside %}
+
+
+{% block content %}
+
+{# H1 #}
+<h1 class="h3 mt-5 border-bottom text-center font-weight-bold">{% trans 'Game List(Last 48h)' %}</h1>
+
+{# Link Button #}
+<div class="text-center mt-3">
+  <a href="{% url 'game_list' 10 %}">
+    <button class="btn  btn-secondary btn-sm {% if sort_id == 10 %}active{% endif %}" type="button">
+      ALL
+    </button>
+  </a>
+
+  <a href="{% url 'game_list' 1 %}">
+    <button class="btn  btn-secondary btn-sm {% if sort_id == 1 %}active{% endif %}" type="button">
+      <i class="em em-computer"></i>PC
+    </button>
+  </a>
+
+  <a href="{% url 'game_list' 2 %}">
+    <button class="btn  btn-secondary btn-sm {% if sort_id == 2 %}active{% endif %}" type="button">
+      <i class="em em-iphone"></i>{% trans 'Mobile' %}
+    </button>
+  </a>
+
+  <a href="{% url 'game_list' 3 %}">
+    <button class="btn  btn-secondary btn-sm {% if sort_id == 3 %}active{% endif %}" type="button">
+      <i class="em em-video_game"></i>{% trans 'Console' %}
+    </button>
+  </a>
+</div>
+
+
+<div class="container mt-3">
+  <div class="row">
+  {% for key, game in game_rank.items %}
+    <div class="col-4 col-md-2 mb-3">
+      <a href="{% url 'game' game.game_name_sys %}">
+
+        <img class="mt-2" src='{{ MEDIA_URL }}{{game.game_icon}}' width="80%"　alt="{{game.game_name_global}}"><br />
+
+
+        <small>
+          <small>
+            {% if game.game_category == game.CATEGORY_PC %}
+              <i class="em em-computer"></i>
+            {% elif game.game_category == game.CATEGORY_MOBILE %}
+              <i class="em em-iphone"></i>
+            {% elif game.game_category == game.CATEGORY_CONSOLE %}
+              <i class="em em-video_game"></i>
+            {% endif %}
+          </small>
+
+          {{game.game_name_global}}
+        </small><br />
+      </a>
+      <small><i class="em em-eye"></i>{{game.last_48h_views | intcomma:False }}</small>
+    </div>
+  {% endfor %}
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

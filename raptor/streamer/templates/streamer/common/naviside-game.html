@@ -1,0 +1,49 @@
+{% load i18n %}
+<div class="text-center">
+  <a href="{% url 'game' game.game_name_sys %}">
+    <img class="mt-2" src='{{ MEDIA_URL }}{{game.game_icon}}' width=150><br />
+  </a>
+</div>
+
+{% if streamer %}
+  <div class="mt-3">
+    {% trans 'Streamer' %}<br />
+    <a href="{% url 'streamer' streamer.id %}">
+      <img class="mt-2" src="{{streamer.streamer_thumbnail}}" style="width:30px;" alt="{{streamer.streamer_name}}">&nbsp;{{streamer.streamer_name}}
+    </a>
+
+  </div>
+{% endif %}
+
+<div class="mt-3">
+
+  {% if streamer %}
+    {% trans 'Other streamsers' %}<br />
+  {% else %}
+    {% trans 'Streamer' %}<br />
+  {% endif %}
+  {% for s in game_streamers %}
+    <a href="{% url 'streamer' s.id %}">
+
+      <img class="mt-2" src="{{s.streamer_thumbnail}}" style="width:30px;" alt="{{s.streamer_name}}">&nbsp;{{s.streamer_name}}<br />
+    </a>
+  {% endfor %}
+</div>
+
+
+<div class="mt-3">
+  {% trans 'Other Popular Games' %}
+</div>
+<div>
+
+  {% for key, g in popular_games.items %}
+
+
+    <a href="{% url 'game' g.game_name_sys %}">
+      <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}'style="width:30px;" alt="{{g.game_name_jp}}">&nbsp;
+      <small>{{g.game_name_global}}</small>
+    </a><br />
+
+  {% endfor %}
+
+</div>

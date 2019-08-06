@@ -1,0 +1,21 @@
+MAILTO="esports.raptor@gmail.com"
+
+00 19 * * * /bin/sh /Projects/raptor/cron/mysql_backup.sh
+00 08 * * * /bin/sh /Projects/raptor/cron/create_log_history.sh
+00 09 * * * /bin/sh /Projects/raptor/cron/update_streamer_all.sh 1> /Projects/log/cron.log 2> /Projects/log/cron_error.log
+00 10 * * * /bin/sh /Projects/raptor/cron/update_video_all.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+00 11 * * * /bin/sh /Projects/raptor/cron/uodate_history_table_all.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+00 12 * * * /bin/sh /Projects/raptor/cron/create_rank_table_all.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+20 15 * * * /bin/sh /Projects/raptor/cron/set_low_views.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+
+#Check the recent data
+40 1,9,17 * * * /bin/sh /Projects/raptor/cron/update_recent_video_info.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+40 3,12,15,19,23 * * * /bin/sh /Projects/raptor/cron/update_newvideo_rank.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+40 7 * * * /bin/sh /Projects/raptor/cron/regist_new_video_all.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+
+#Regist new streamer Video
+20 */1 * * * /bin/sh /Projects/raptor/cron/regist_popular_video.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+
+#Post Twitter
+*/15 * * * * /bin/sh /Projects/raptor/cron/post_twitter.sh 1>> /Projects/log/cron.log 2>> /Projects/log/cron_error.log
+

@@ -1,0 +1,193 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{# SEO Setting #}
+
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_top_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{ seo_settings.website }}|{% trans 'Find your favorit video & game!' %}{% endblock title %}
+{% block og_title %}{% trans 'Video Platform for Gamers' %}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{% trans 'core game tv,core game,game,game video,game streaming,esports video,game video platform' %}{% endblock keywords %}
+{% block description %}{% trans 'Core Game TV is the video plartform for gamers. Choose from millions of  game videos for PC, Mobile, Console games. Find your favorit videos, streamers, even you can find your favorit games!' %}{% endblock description %}
+{% block og_description %}{% trans 'Core Game TV is the video plartform for gamers. Choose from millions of  game videos for PC, Mobile, Console games. Find your favorit videos, streamers, even you can find your favorit games!' %}{% endblock og_description %}
+
+
+{# Navi Top for Mobile #}
+{% block topnavi %}
+
+  <div>
+      {% trans 'Popular Games' %}
+  </div>
+  <div>
+    {% for key, g in popular_games_navi.items %}
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=40 alt="{{g.game_name_global}}">&nbsp;
+      </a>
+
+    {% endfor %}
+  </div>
+
+
+{% endblock topnavi %}
+
+
+{# Navi Side for PC #}
+{% block naviside %}
+
+  <div class="mt-3">
+    {% trans 'Popular Games' %}
+  </div>
+  <div>
+
+    {% for key, g in popular_games_navi.items %}
+
+
+      <a href="{% url 'game' g.game_name_sys %}">
+        <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=30 alt="{{g.game_name_global}}">&nbsp;
+        <small>{{g.game_name_global}}</small>
+      </a><br />
+
+    {% endfor %}
+
+  </div>
+
+
+{% endblock naviside %}
+
+
+
+{% block content %}
+
+    <h1 class="h5 mt-5 border-bottom text-center font-weight-bold">{% trans 'CoreGameTV(Game Video)' %}</h1>
+
+    <h2 class="h5 mt-5 text-center font-weight-bold">
+      {% trans 'Most Viewed Games' %}
+      <a class="ml-2" href="{% url 'game_list' 10 %}">
+        <button class="btn  btn-secondary btn-sm" type="button">
+          {% trans 'more' %}
+        </button>
+      </a>
+    </h2>
+    <div class="container mt-3">
+      <div class="row">
+      {% for key, game in popular_games.items %}
+        <div class="col-4 col-md-2 mb-3">
+          <a href="{% url 'game' game.game_name_sys %}">
+
+            <img class="mt-2" src='{{ MEDIA_URL }}{{game.game_icon}}' width="80%" alt="{{game.game_name_global}}"><br />
+
+
+            <small>{{game.game_name_global}}</small><br />
+          </a>
+          <small><i class="em em-eye"></i>{{game.last_48h_views | intcomma:False}}</small>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+
+
+
+
+    <h2 class="h5 mt-5 text-center font-weight-bold">
+      {% trans 'Most Viewed Game Videos' %}
+      <a class="ml-2" href="{% url 'ranking' 'video' 'all' 'all' 1 %}">
+        <button class="btn  btn-secondary btn-sm" type="button">
+          {% trans 'more' %}
+        </button>
+      </a>
+    </h2>
+
+    <div class="mt-2 container-fluid text-black">
+        <div class="row">
+        {% for v in popular_videos %}
+          {% include './common/show_video_list_from_rank_table.html' with video=v %}
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <h2 class="h5 mt-5 text-center font-weight-bold">
+      {% trans 'Hottest Game Videos' %}
+      <a class="ml-2" href="{% url 'ranking' 'video' 'toprate' 'all' 1 %}">
+        <button class="btn  btn-secondary btn-sm" type="button">
+          {% trans 'more' %}
+        </button>
+      </a>
+    </h2>
+
+    <div class="mt-5 container-fluid text-black">
+        <div class="row">
+        {% for v in recommends %}
+          {% include './common/show_video_list_from_rank_table.html' with video=v %}
+        {% endfor %}
+      </div>
+    </div>
+
+
+
+
+    <h2 class="h5 mt-5 border-bottom text-left font-weight-bold">
+      {% trans 'Popular Game Streamers' %}
+      <a class="ml-2" href="{% url 'ranking' 'streamer' 1 10 1 %}">
+        <button class="btn  btn-secondary btn-sm" type="button">
+          {% trans 'more' %}
+        </button>
+      </a>
+    </h2>
+    {# Streamer Detail #}
+    <div class="container mt-3 bg-clearblack ">
+      {% for s in streamer_ranks %}
+          <div class="row border-bottom">
+            <div class="col-3 col-md-2 align-self-center text-center">
+              <a href="{% url 'streamer' s.streamer_id %}">
+                <img class="mt-2" src="{{s.streamer_thumbnail}}" width=80% alt="{{s.streamer_name}}">
+              </a>
+            </div>
+            <div class="col-7 col-md-3">
+              <div class="mt-2 small">
+                #{{ forloop.counter }}:
+                <a href="{% url 'streamer' s.streamer_id %}">
+                  {{s.streamer_name}}
+                </a>
+                {% if s.gender == s.GENDER_MALE %}
+                  <span class = "text-primary">(♂)</span>
+                {% elif s.gender == s.GENDER_FEMALE %}
+                  <span class = "text-danger">(♀)</span>
+                {% else %}
+                  <span class = "text-info">(?)</span>
+                {% endif %}
+              </div>
+
+
+              <div class = "small">
+                {% trans 'Views(last48h):' %}<span class="text-danger">{{s.total_view_count_last48h| intcomma:False }}</span>
+              </div>
+
+            </div>
+            <div class="col-2 col-md-7 text-left">
+              {% if s.game.id != 1 %}
+                <a href="{% url 'game' s.game.game_name_sys %}">
+                  <img class="mt-2" src='{{ MEDIA_URL }}{{s.game.game_icon}}' style="width:40px;" alt="{{s.game.game_name_global}}">
+                </a>
+              {% else %}
+                <a href="{% url 'game' s.game.game_name_sys %}">
+                  <img class="mt-2" src='{{ MEDIA_URL }}{{s.game.game_icon}}' style="width:40px;" alt="{{s.game.game_name_global}}">
+                </a>
+              {% endif %}
+            </div>
+          </div>
+
+      {% endfor %}
+    </div>
+
+
+
+
+
+{% endblock content %}

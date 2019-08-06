@@ -1,0 +1,32 @@
+{% load humanize static %}
+<div class="col-12 col-sm-4 col-md-3 border-bottom">
+
+  <div class="small">
+    <span class="text-right">
+      <a href="{% url 'streamer' video.streamer.id %}">
+      <img class="mt-2" src="{{video.streamer.streamer_thumbnail}}" style="width:20px;" alt="{{video.streamer.streamer_name}}">{{video.streamer.streamer_name}}
+      </a>
+    </span>
+  </div>
+
+  <a href="{% url 'video' video.video_link_id %}" >
+    <img class="mt-1" src="{{video.video_thumbnail_medium}}" width=100% alt="{{video.video_title|truncatechars:40}}">
+  </a>
+
+
+  <div class="container text-black mt-1">
+      <div class="row">
+        <div class="col-12 text-right">
+            <div class="small text-right">
+              <i class="em em-calendar"></i>{{video.published_before}}
+              <i class="em em-eye"></i>{{video.num_str}}
+              <i class="em em-star"></i>{{video.rating}}
+            </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="mt-1 small">
+    <a href="{% url 'video' video.video_link_id %}" >{{video.video_title|truncatechars:40}}</a>
+  </div>
+</div>

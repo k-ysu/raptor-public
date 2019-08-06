@@ -1,0 +1,269 @@
+{% extends "streamer/base.html" %}
+{% load humanize static  %}
+{% load i18n %}
+
+{% block og_url %}{{ request.build_absolute_uri }}{{ object.get_absolute_url }}{% endblock og_url %}
+{% block og_type %}{{ seo_settings.og_type }}{% endblock og_type %}
+{% block og_image %}http://{{ request.get_host }}{% static "streamer/img/core-game-for-sns.jpg" %}{% endblock og_image %}
+
+{% block title %}{{game.game_name_global}}{% trans ' Videos' %} | {{ seo_settings.website }}{% endblock title %}
+{% block og_title %}{{game.game_name_global}}{% trans ' Videos' %}{% endblock og_title %}
+{% block og_site_name %}{{ seo_settings.website }}{% endblock og_site_name %}
+
+{% block keywords %}{{game.game_name_global}},{% trans 'video,game video,game streaming,esports,core game,core game tv' %}{% endblock keywords %}
+{% block description %}{% if common_settings.server_service == 'jp' %}{{game.game_name_global}}のゲーム実況者のランキングや{{game.game_name_global}}の人気・新着ゲーム動画をまとめてます！好きな動画やゲーム実況者を探そう！{% else %}Great {{game.game_name_global}} videos on Core Game TV!  You can find {{game.game_name_global}} videos and streamers. Watch new, popular, hot videos for {{game.game_name_global}}.{% endif %}{% endblock description %}
+{% block og_description %}{% if common_settings.server_service == 'jp' %}{{game.game_name_global}}のゲーム実況者のランキングや{{game.game_name_global}}の人気・新着ゲーム動画をまとめてます！好きな動画やゲーム実況者を探そう！{% else %}Great {{game.game_name_global}} videos on Core Game TV!  You can find {{game.game_name_global}} videos and streamers. Watch new, popular, hot videos for {{game.game_name_global}}.{% endif %}{% endblock og_description %}
+
+
+
+
+
+{# Navi Top for Mobile #}
+{% block topnavi %}
+<div class="row">
+  <div class="col-12">
+    {% trans 'Game' %}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <a href="{% url 'game' game.game_name_sys %}">
+      <img class="mt-2" src='{{ MEDIA_URL }}{{game.game_icon}}' width=60 alt="{{game.game_name_global}}">&nbsp;{{game.game_name_global}}
+    </a>
+  </div>
+</div>
+<div>
+    {% trans 'Other Games' %}
+</div>
+<div>
+  {% for key, g in popular_games.items %}
+
+    <a href="{% url 'game' g.game_name_sys %}">
+      <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=40 alt="{{g.game_name_global}}">&nbsp;
+    </a>
+
+  {% endfor %}
+</div>
+
+
+
+
+{% endblock topnavi %}
+
+{# Navi Side for PC #}
+{% block naviside %}
+<div class="text-center">
+  <a href="{% url 'game' game.game_name_sys %}">
+    <img class="mt-2" src='{{ MEDIA_URL }}{{game.game_icon}}' width=150 alt="{{game.game_name_global}}"><br />
+  </a>
+</div>
+<div class="mt-3">
+  {% trans 'Other Games' %}
+</div>
+<div>
+
+  {% for key, g in popular_games.items %}
+
+
+    <a href="{% url 'game' g.game_name_sys %}">
+      <img class="mt-2" src='{{ MEDIA_URL }}{{g.game_icon}}' width=30 alt="{{g.game_name_global}}">&nbsp;
+      <small>{{g.game_name_global}}</small>
+    </a><br />
+
+  {% endfor %}
+
+</div>
+{% endblock naviside %}
+
+{# Content #}
+{% block content %}
+
+{# Category Tree #}
+<small>
+  <div class="mt-5">
+    <a href="{% url 'index' %}">TOP</a> >
+    {{game.game_name_global}}
+  </div>
+</small>
+
+
+
+
+{# H1 #}
+<h1 class="h4 mt-3 text-center font-weight-bold"><img src='{{ MEDIA_URL }}{{game.game_icon}}' width=40 alt="{{game.game_name_global}}">&nbsp;{{game.game_name_global}}{% trans ' Videos' %}</h1>
+
+{# Navigation Tab #}
+<ul class="nav nav-pills mt-3 mb-3 bg-clearblack" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-recommend-tab" data-toggle="pill" href="#pills-recommend" role="tab" aria-controls="pills-recommend" aria-selected="true">{% trans 'Hot!' %}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">{% trans 'New' %}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-popular-tab" data-toggle="pill" href="#pills-popular" role="tab" aria-controls="pills-popular" aria-selected="false">{% trans 'Popular' %}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-streamer-tab" data-toggle="pill" href="#pills-streamer" role="tab" aria-controls="pills-streamer" aria-selected="false">{% trans 'Streamers' %}</a>
+  </li>
+
+</ul>
+<div class="tab-content" id="pills-tabContent">
+
+
+  {# ====Recommend Video==== #}
+  <div class="tab-pane fade show active" id="pills-recommend" role="tabpanel" aria-labelledby="pills-recommend-tab">
+
+
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-8">
+          <h2 class="h6">
+              <i class="em em-movie_camera"></i>{% trans 'Recoomend Videos(Top Rate)' %}&nbsp;
+          </h2>
+        </div>
+        <div class="col-4 text-right">
+          <a href="{% url 'game_videos' game.game_name_sys 'recommend' %}">
+            <button class="btn  btn-secondary btn-sm" type="button">
+              <small>{% trans 'more' %}</small>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mt-2 container-fluid text-black">
+        <div class="row">
+        {% for v in recommends %}
+          {% include './common/show_video_list.html' with video=v %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="{% url 'game_videos' game.game_name_sys 'recommend' %}">
+        <button class="btn  btn-secondary" type="button">
+          <small>{% trans 'more' %}</small>
+        </button>
+      </a>
+    </div>
+  </div>
+
+
+  {# ====New Video==== #}
+  <div class="tab-pane fade" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
+
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-8">
+          <h2 class="h6">
+              <i class="em em-movie_camera"></i>{% trans 'New Videos' %}&nbsp;
+          </h2>
+        </div>
+        <div class="col-4 text-right">
+          <a href="{% url 'game_videos' game.game_name_sys 'new' %}">
+            <button class="btn  btn-secondary btn-sm" type="button">
+              <small>{% trans 'more' %}</small>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2 container-fluid text-black">
+        <div class="row">
+        {% for v in latest_video_lists %}
+          {% include './common/show_video_list.html' with video=v %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="{% url 'game_videos' game.game_name_sys 'new' %}">
+        <button class="btn  btn-secondary" type="button">
+          <small>{% trans 'more' %}</small>
+        </button>
+      </a>
+    </div>
+  </div>
+
+
+
+
+  {# ====Popular Video==== #}
+  <div class="tab-pane fade" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
+
+    <div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-8">
+          <h2 class="h6">
+              <i class="em em-movie_camera"></i>{% trans 'Popular Videos(Total Views)' %}&nbsp;
+          </h2>
+        </div>
+        <div class="col-4 text-right">
+          <a href="{% url 'game_videos' game.game_name_sys 'popular' %}">
+            <button class="btn  btn-secondary" type="button">
+              <small>{% trans 'more' %}</small>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mt-2 container-fluid text-black">
+        <div class="row">
+        {% for v in most_views %}
+          {% include './common/show_video_list.html' with video=v %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="{% url 'game_videos' game.game_name_sys 'popular' %}">
+        <button class="btn  btn-secondary" type="button">
+          <small>{% trans 'more' %}</small>
+        </button>
+      </a>
+    </div>
+
+
+  </div>
+
+
+  {# ====Game Streamer Ranking==== #}
+  <div class="tab-pane fade" id="pills-streamer" role="tabpanel" aria-labelledby="pills-streamer-tab">
+
+    <h2 class="h6 mt-2">
+        <i class="em em-movie_camera"></i>{% trans 'Streamer Ranking(48h views)' %}&nbsp;
+    </h2>
+
+    <div class="container-fluid mt-3">
+      {% for s in game_streamers %}
+          <div class="row">
+            <div class="col-12 bg-clearblack ">
+                #{{s.rank}}:&nbsp;
+                <a href="{% url 'streamer' s.streamer_id %}">
+                  <img class="mt-2" src="{{s.streamer_thumbnail}}" style="width:25px;" alt="{{s.streamer_name}}">&nbsp;{{s.streamer_name}}
+                </a>
+                <span class="text-danger">
+                  ({{s.total_view_count_last48h| intcomma:False }})
+                </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 bg-clearblack border-bottom border-secondary">
+              <small>
+                {% trans 'Subscribers(last 48h)' %}:<span class="text-info">{{s.total_subscribe_count_last48h| intcomma:False }}</span>,&nbsp;
+                {% trans 'Total Subscribers' %}:<span class="text-info">{{s.youtube_suscribers| intcomma:False }}<span>
+                </small>
+            </div>
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+{% endblock content %}

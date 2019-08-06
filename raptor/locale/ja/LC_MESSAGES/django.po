@@ -1,0 +1,429 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-31 15:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: streamer/templates/streamer/base.html:90
+#: streamer/templates/streamer/base.html:148
+msgid "Game List"
+msgstr "ゲーム一覧"
+
+#: streamer/templates/streamer/base.html:95
+#: streamer/templates/streamer/base.html:153
+msgid "Game Streamer Ranking"
+msgstr "ゲーム配信者ランキング"
+
+#: streamer/templates/streamer/base.html:100
+#: streamer/templates/streamer/base.html:158
+#: streamer/templates/streamer/ranking_video.html:16
+#: streamer/templates/streamer/ranking_video.html:17
+#: streamer/templates/streamer/ranking_video.html:76
+msgid "Game Video Ranking"
+msgstr "ゲーム動画ランキング"
+
+#: streamer/templates/streamer/base.html:105
+#: streamer/templates/streamer/base.html:163
+#: streamer/templates/streamer/game.html:160
+#: streamer/templates/streamer/streamer.html:214
+#: streamer/views/game_videos.py:59 streamer/views/streamer_videos.py:47
+msgid "New Videos"
+msgstr "新着ゲーム動画"
+
+#: streamer/templates/streamer/base.html:110
+#: streamer/templates/streamer/base.html:168
+#: streamer/templates/streamer/base.html:197
+msgid "Inquiry"
+msgstr "問い合わせ"
+
+#: streamer/templates/streamer/base.html:198
+msgid ""
+"Rights for images on coregame.tv are belongs to Streamers, Streaming media, "
+"Someone who has rights"
+msgstr ""
+"当サイトで利用しているサムネイルの著作権は、ゲーム制作会社様、配信者様、配信"
+"サイト様、各権利所有者様に帰属します"
+
+#: streamer/templates/streamer/common/naviside-game.html:10
+#: streamer/templates/streamer/common/naviside-game.html:23
+#: streamer/templates/streamer/common/navitop-game.html:11
+#: streamer/templates/streamer/common/navitop-game.html:52
+msgid "Streamer"
+msgstr "配信者"
+
+#: streamer/templates/streamer/common/naviside-game.html:21
+#: streamer/templates/streamer/common/navitop-game.html:50
+msgid "Other streamsers"
+msgstr "このゲームの他の配信者"
+
+#: streamer/templates/streamer/common/naviside-game.html:35
+#: streamer/templates/streamer/common/navitop-game.html:68
+#: streamer/templates/streamer/video.html:140
+msgid "Other Popular Games"
+msgstr "その他の人気ゲーム"
+
+#: streamer/templates/streamer/common/navitop-game.html:8
+#: streamer/templates/streamer/common/navitop-game.html:32
+#: streamer/templates/streamer/game.html:25
+#: streamer/templates/streamer/streamer.html:146
+msgid "Game"
+msgstr "ゲーム一覧"
+
+#: streamer/templates/streamer/error.html:11
+msgid "404 : Page not found"
+msgstr ""
+
+#: streamer/templates/streamer/error.html:12
+msgid "Game Video Platform"
+msgstr "ゲーム動画プラットフォーム"
+
+#: streamer/templates/streamer/error.html:15
+#: streamer/templates/streamer/error.html:16
+#: streamer/templates/streamer/error.html:17
+msgid "Core Game TV"
+msgstr ""
+
+#: streamer/templates/streamer/error.html:25
+msgid "Requested page is not found"
+msgstr "ページが見つかりませんでした。"
+
+#: streamer/templates/streamer/game.html:9
+#: streamer/templates/streamer/game.html:10
+#: streamer/templates/streamer/game.html:93
+#: streamer/templates/streamer/streamer.html:9
+#: streamer/templates/streamer/streamer.html:10
+#: streamer/templates/streamer/streamer.html:44
+msgid " Videos"
+msgstr "の動画まとめ"
+
+#: streamer/templates/streamer/game.html:13
+msgid "video,game video,game streaming,esports,core game,core game tv"
+msgstr "動画,ゲーム,ゲーム実況,CoreGameTV,コアゲーム,コアゲームTV"
+
+#: streamer/templates/streamer/game.html:36
+#: streamer/templates/streamer/game.html:61
+msgid "Other Games"
+msgstr "その他の人気ゲーム"
+
+#: streamer/templates/streamer/game.html:98
+msgid "Hot!"
+msgstr "おすすめ"
+
+#: streamer/templates/streamer/game.html:101
+#: streamer/templates/streamer/game_videos.html:50
+#: streamer/templates/streamer/ranking_video.html:113
+#: streamer/templates/streamer/ranking_video.html:126
+#: streamer/templates/streamer/streamer.html:57
+#: streamer/templates/streamer/streamer_videos.html:59
+#: streamer/views/ranking.py:147
+msgid "New"
+msgstr "新着"
+
+#: streamer/templates/streamer/game.html:104
+#: streamer/templates/streamer/game_videos.html:66
+#: streamer/templates/streamer/streamer.html:60
+#: streamer/templates/streamer/streamer_videos.html:75
+msgid "Popular"
+msgstr "人気"
+
+#: streamer/templates/streamer/game.html:107
+msgid "Streamers"
+msgstr "配信者"
+
+#: streamer/templates/streamer/game.html:122
+msgid "Recoomend Videos(Top Rate)"
+msgstr "おすすめ動画(高評価)"
+
+#: streamer/templates/streamer/game.html:128
+#: streamer/templates/streamer/game.html:146
+#: streamer/templates/streamer/game.html:166
+#: streamer/templates/streamer/game.html:182
+#: streamer/templates/streamer/game.html:204
+#: streamer/templates/streamer/game.html:222
+#: streamer/templates/streamer/index.html:73
+#: streamer/templates/streamer/index.html:101
+#: streamer/templates/streamer/index.html:119
+#: streamer/templates/streamer/index.html:139
+#: streamer/templates/streamer/streamer.html:181
+#: streamer/templates/streamer/streamer.html:198
+#: streamer/templates/streamer/streamer.html:220
+#: streamer/templates/streamer/streamer.html:237
+#: streamer/templates/streamer/streamer.html:259
+#: streamer/templates/streamer/streamer.html:277
+msgid "more"
+msgstr "もっと見る"
+
+#: streamer/templates/streamer/game.html:198
+#: streamer/templates/streamer/streamer.html:253
+msgid "Popular Videos(Total Views)"
+msgstr "人気動画(総再生数)"
+
+#: streamer/templates/streamer/game.html:235
+msgid "Streamer Ranking(48h views)"
+msgstr "実況者ランキング(48時間再生数)"
+
+#: streamer/templates/streamer/game.html:254
+msgid "Subscribers(last 48h)"
+msgstr "登録者数(48時間)"
+
+#: streamer/templates/streamer/game.html:255
+msgid "Total Subscribers"
+msgstr "総登録者数"
+
+#: streamer/templates/streamer/game_list.html:9
+#: streamer/templates/streamer/game_list.html:10
+msgid "Popular Games List"
+msgstr "人気ゲーム一覧"
+
+#: streamer/templates/streamer/game_list.html:13
+msgid ""
+"popular game,popular game list,core game tv,core game,game video,game "
+"streaming"
+msgstr ""
+"人気ゲーム,人気ゲーム一覧,CoreGameTV,コアゲーム,コアゲームTV,ゲーム動画,ゲー"
+"ム実況"
+
+#: streamer/templates/streamer/game_list.html:14
+#: streamer/templates/streamer/game_list.html:15
+msgid ""
+"Game lists which is most viewed in last 48 hours. Finder your favorit game "
+"video!"
+msgstr "再生数が多いゲームの一覧です。好きなゲームの動画を探そう！"
+
+#: streamer/templates/streamer/game_list.html:25
+#: streamer/templates/streamer/game_list.html:45
+#: streamer/templates/streamer/index.html:24
+#: streamer/templates/streamer/index.html:44
+#: streamer/templates/streamer/ranking_streamer.html:29
+#: streamer/templates/streamer/ranking_streamer.html:49
+#: streamer/templates/streamer/ranking_video.html:33
+#: streamer/templates/streamer/ranking_video.html:52
+msgid "Popular Games"
+msgstr "人気ゲーム"
+
+#: streamer/templates/streamer/game_list.html:68
+msgid "Game List(Last 48h)"
+msgstr "ゲーム一覧(48時間再生数順)"
+
+#: streamer/templates/streamer/game_list.html:86
+#: streamer/templates/streamer/ranking_video.html:95
+msgid "Mobile"
+msgstr "モバイル"
+
+#: streamer/templates/streamer/game_list.html:92
+#: streamer/templates/streamer/ranking_video.html:101
+msgid "Console"
+msgstr "コンソール"
+
+#: streamer/templates/streamer/game_videos.html:14
+msgid "core game tv,core game"
+msgstr "コアゲームTV,コアゲーム,CoreGameTV"
+
+#: streamer/templates/streamer/game_videos.html:58
+#: streamer/templates/streamer/streamer.html:54
+#: streamer/templates/streamer/streamer_videos.html:67
+msgid "Recommend"
+msgstr "おすすめ"
+
+#: streamer/templates/streamer/index.html:11
+msgid "Find your favorit video & game!"
+msgstr "ゲーム動画プラットフォーム"
+
+#: streamer/templates/streamer/index.html:12
+msgid "Video Platform for Gamers"
+msgstr "ゲーム動画プラットフォーム"
+
+#: streamer/templates/streamer/index.html:15
+msgid ""
+"core game tv,core game,game,game video,game streaming,esports video,game "
+"video platform"
+msgstr ""
+"CoreGameTV,コアゲーム,コアゲームTV,ゲーム,ゲーム動画,ゲーム実況,ゲーム配信"
+
+#: streamer/templates/streamer/index.html:16
+#: streamer/templates/streamer/index.html:17
+msgid ""
+"Core Game TV is the video plartform for gamers. Choose from millions of  "
+"game videos for PC, Mobile, Console games. Find your favorit videos, "
+"streamers, even you can find your favorit games!"
+msgstr ""
+"CoreGameTVは人気のゲーム動画や人気のゲーム実況者が見つかるゲーム動画プラット"
+"フォームです。お気に入りのゲーム動画を探そう！"
+
+#: streamer/templates/streamer/index.html:67
+msgid "CoreGameTV(Game Video)"
+msgstr "CoreGameTV(ゲーム動画)"
+
+#: streamer/templates/streamer/index.html:70
+msgid "Most Viewed Games"
+msgstr "再生数の多いゲーム"
+
+#: streamer/templates/streamer/index.html:98
+msgid "Most Viewed Game Videos"
+msgstr "再生数の多いゲーム動画"
+
+#: streamer/templates/streamer/index.html:116
+msgid "Hottest Game Videos"
+msgstr "おすすめゲーム動画"
+
+#: streamer/templates/streamer/index.html:136
+msgid "Popular Game Streamers"
+msgstr "おすすめゲーム実況者"
+
+#: streamer/templates/streamer/index.html:169
+msgid "Views(last48h):"
+msgstr "再生数(48時間):"
+
+#: streamer/templates/streamer/ranking_streamer.html:15
+#: streamer/templates/streamer/ranking_streamer.html:16
+#: streamer/templates/streamer/ranking_streamer.html:73
+msgid "Ranking"
+msgstr "ランキング"
+
+#: streamer/templates/streamer/ranking_streamer.html:87
+msgid "Male"
+msgstr "男性"
+
+#: streamer/templates/streamer/ranking_streamer.html:93
+msgid "Female"
+msgstr "女性"
+
+#: streamer/templates/streamer/ranking_streamer.html:104
+#: streamer/templates/streamer/ranking_streamer.html:113
+#: streamer/templates/streamer/ranking_video.html:115
+#: streamer/templates/streamer/ranking_video.html:124
+msgid "Total views last 48h"
+msgstr "総合(48時間再生数):"
+
+#: streamer/templates/streamer/ranking_streamer.html:106
+#: streamer/templates/streamer/ranking_streamer.html:114
+msgid "Growing(subscriber last 48h)"
+msgstr "急上昇!(48時間登録数)"
+
+#: streamer/templates/streamer/ranking_streamer.html:108
+#: streamer/templates/streamer/ranking_streamer.html:115
+#: streamer/templates/streamer/ranking_streamer.html:155
+#: streamer/templates/streamer/ranking_streamer.html:167
+#: streamer/templates/streamer/ranking_streamer.html:179
+#: streamer/templates/streamer/streamer.html:118 streamer/views/ranking.py:72
+msgid "Total Subscriber"
+msgstr "総登録数"
+
+#: streamer/templates/streamer/ranking_streamer.html:149
+#: streamer/templates/streamer/ranking_streamer.html:161
+#: streamer/templates/streamer/ranking_streamer.html:173
+#: streamer/templates/streamer/streamer.html:126
+msgid "Views(last 48h)"
+msgstr "再生数(48時間):"
+
+#: streamer/templates/streamer/ranking_streamer.html:152
+#: streamer/templates/streamer/ranking_streamer.html:164
+#: streamer/templates/streamer/ranking_streamer.html:176
+#: streamer/templates/streamer/streamer.html:122
+msgid "Subscriber(last 48h)"
+msgstr "登録者数(48時間)"
+
+#: streamer/templates/streamer/ranking_video.html:117
+#: streamer/templates/streamer/ranking_video.html:125
+#: streamer/views/ranking.py:149
+msgid "Top Rate"
+msgstr "高評価"
+
+#: streamer/templates/streamer/ranking_video.html:119
+#: streamer/templates/streamer/ranking_video.html:127
+msgid "Total views"
+msgstr "総再生数"
+
+#: streamer/templates/streamer/streamer.html:14
+#, fuzzy
+#| msgid "video,game video,game streaming,esports,core game,core game tv"
+msgid "game video,game streaming,video,core game,core game tv"
+msgstr "動画,ゲーム,ゲーム実況,CoreGameTV,コアゲーム,コアゲームTV"
+
+#: streamer/templates/streamer/streamer.html:51
+msgid "Profile"
+msgstr "プロフィール"
+
+#: streamer/templates/streamer/streamer.html:130
+msgid "Total Rank"
+msgstr "総合ランク"
+
+#: streamer/templates/streamer/streamer.html:134
+#, fuzzy
+#| msgid "Game Video Ranking"
+msgid "Game Rank"
+msgstr "ゲームランク"
+
+#: streamer/templates/streamer/streamer.html:175
+#: streamer/views/game_videos.py:64 streamer/views/streamer_videos.py:52
+msgid "Reommend Videos(Top Rate)"
+msgstr "おすすめ動画(高評価)"
+
+#: streamer/templates/streamer/video.html:77
+msgid "Related Videos"
+msgstr "おすすめ関連動画"
+
+#: streamer/templates/streamer/video.html:80
+msgid "Details"
+msgstr "ビデオ詳細"
+
+#: streamer/utility/util.py:30
+msgid "CoreGameTV(Video Platform for gamers)"
+msgstr "CoreGameTV(ゲーム動画)"
+
+#: streamer/views/game_videos.py:69 streamer/views/streamer_videos.py:57
+msgid "Popular Videos(Top Views)"
+msgstr "人気動画(総再生数)"
+
+#: streamer/views/ranking.py:70 streamer/views/ranking.py:150
+msgid "Total Views"
+msgstr "総再生数"
+
+#: streamer/views/ranking.py:71
+msgid "Growing"
+msgstr "急上昇"
+
+#: streamer/views/ranking.py:76
+msgid "Male "
+msgstr "男性"
+
+#: streamer/views/ranking.py:77
+msgid "Female "
+msgstr "女性"
+
+#: streamer/views/ranking.py:80 streamer/views/ranking.py:81
+#: streamer/views/ranking.py:82
+msgid "Game Streamer "
+msgstr "ゲーム実況者"
+
+#: streamer/views/ranking.py:148
+msgid "Total Views last 48hour"
+msgstr "総合"
+
+#: streamer/views/ranking.py:156
+msgid "Mobile "
+msgstr "モバイル"
+
+#: streamer/views/ranking.py:157
+msgid "Console "
+msgstr "コンソール"
+
+#~ msgid "Recoomend"
+#~ msgstr "おすすめ"
+
+#~ msgid "Game Streamers"
+#~ msgstr "実況者一覧"
