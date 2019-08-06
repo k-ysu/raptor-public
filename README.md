@@ -1,5 +1,5 @@
 # Raptor Project ( Copy ) 
-Video Platform for gamers. This is the copy of raptor project eliminating credential information such as database access. This is mainly for portfolio purpose what I have done.
+Video Platform for gamers. This is the copy of raptor project eliminating credential information such as database access. Therefore, this project itself will not work. Actual project is under the private repository. This is mainly for portfolio purpose what I have done.
 
 # Website
 This is not just tranlation. Even database itself is different between Japanese and English service.
@@ -41,7 +41,7 @@ Create view from existing tables.
 Tweet on twitter once new video comes up. See examples below. This is user aquisition purpose. 
 https://twitter.com/CoreGameTV_fort
 
-# To see my work sa Data Scientist
+# To see my work as Data Scientist
 
 See link below. This is the source code to create video summary table utlizing python, SQL. 
 
