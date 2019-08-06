@@ -41,3 +41,8 @@ Create view from existing tables.
 Tweet on twitter once new video comes up. See examples below. This is user aquisition purpose. 
 https://twitter.com/CoreGameTV_fort
 
+# To see my work sa Data Scientist
+
+See link below. This is the source code to create video summary table utlizing python, SQL. 
+
+[create_video_rank_table.py](https://github.com/k-ysu/raptor-public/blob/master/raptor/streamer/management/commands/create_video_rank_table.py)
